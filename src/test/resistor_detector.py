@@ -20,7 +20,7 @@ TOLERANCE = 0.15      # ±15%
 def voltage_to_resistance(v):
     if v <= 0.01 or v >= VREF - 0.01:
         return None
-    return FIXED_R * v / (VREF - v)
+    return FIXED_R * (VREF - v) / v
 
 def detect_resistor(v):
     r = voltage_to_resistance(v)
