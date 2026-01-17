@@ -1,9 +1,14 @@
 import json
+import time
+import os
+
 from mcp3208_reader import MCP3208Reader
 from resistor_detector import detect_resistor
 
 with open("pin_data.json") as f:
     PIN_DEFS = json.load(f)
+
+UPDATE_INTERVAL = 0.2  # 秒（リアルタイム更新周期）
 
 def get_loop_parameter():
     """
@@ -33,6 +38,11 @@ def get_loop_parameter():
 
 
 if __name__ == "__main__":
-    params = get_loop_parameter()
-    for i, p in enumerate(params):
-        print(f"Slot {i:02d}: {p}")
+    while True:
+        os.system("clear")   # 画面を元通りリセット
+
+        params = get_loop_parameter()
+        for i, p in enumerate(params):
+            print(f"Slot {i:02d}: {p}")
+
+        time.sleep(UPDATE_INTERVAL)
