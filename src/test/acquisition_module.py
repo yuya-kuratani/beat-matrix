@@ -1,21 +1,18 @@
 import json
-import time
-import os
-
 from mcp3208_reader import MCP3208Reader
 from resistor_detector import detect_resistor
 
-with open("pin_data.json") as f:
+with open("../../assets/pin_data.json") as f:
     PIN_DEFS = json.load(f)
 
-UPDATE_INTERVAL = 0.2  # 秒（リアルタイム更新周期）
+_reader = MCP3208Reader()
 
 def get_loop_parameter():
     """
     return:
         [[instrument, complexity, volume], ...] (length = 16)
     """
-    reader = MCP3208Reader()
+    
     voltages = reader.read_all_16()
 
     loop_params = []
@@ -37,12 +34,6 @@ def get_loop_parameter():
     return loop_params
 
 
-if __name__ == "__main__":
-    while True:
-        os.system("clear")   # 画面を元通りリセット
-
-        params = get_loop_parameter()
-        for i, p in enumerate(params):
-            print(f"Slot {i:02d}: {p}")
-
-        time.sleep(UPDATE_INTERVAL)
+if __name__ == "__acquisition_module__":
+    print("acquisition_module.py は取得用モジュールです。")
+    print("audio_test.py から import して使用してください。")
