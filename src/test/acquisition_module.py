@@ -2,7 +2,7 @@ import json
 from mcp3208_reader import MCP3208Reader
 from resistor_detector import detect_resistor
 
-with open("pin_data.json") as f:
+with open("../../assets/pin_data.json") as f:
     PIN_DEFS = json.load(f)
 
 _reader = MCP3208Reader()
